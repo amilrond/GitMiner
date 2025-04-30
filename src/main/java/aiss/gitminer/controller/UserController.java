@@ -30,7 +30,7 @@ public class UserController {
     //GET http://localhost:8080/api/users/{id}
     @GetMapping("/{id}")
     public  User findOne(@PathVariable long id) throws UserNotFoundException {
-        Optional<User> user = repository.findById();
+        Optional<User> user = repository.findById(id);
         if (!user.isPresent()) {
             throw new UserNotFoundException();
         }
