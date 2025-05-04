@@ -11,8 +11,7 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     @Column(name = "username")
     @NotEmpty(message = "The username cannot be empty")
@@ -22,10 +21,10 @@ public class User {
     private String name;
 
     @Column(name = "avatar_url")
-    private String avatarUrl;
+    private String avatar_url;
 
     @Column(name = "web_url")
-    private String webUrl;
+    private String web_url;
 
     @OneToMany(mappedBy = "author")
     private List<Comment> authoredComments;
@@ -39,16 +38,17 @@ public class User {
     public User() {
     }
 
-    public User(String username, String name, String avatarUrl, String webUrl) {
+    public User(String id, String username, String name, String avatar_url, String web_url) {
+        this.id = id;
         this.username = username;
         this.name = name;
-        this.avatarUrl = avatarUrl;
-        this.webUrl = webUrl;
+        this.avatar_url = avatar_url;
+        this.web_url = web_url;
     }
 
-    public long getId() { return id; }
+    public String getId() { return id; }
 
-    public void setId(long id) { this.id = id; }
+    public void setId(String id) { this.id = id; }
 
     public String getUsername() { return username; }
 
@@ -58,13 +58,21 @@ public class User {
 
     public void setName(String name) { this.name = name; }
 
-    public String getAvatarUrl() { return avatarUrl; }
+    public String getAvatar_url() {
+        return avatar_url;
+    }
 
-    public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
+    public void setAvatar_url(String avatar_url) {
+        this.avatar_url = avatar_url;
+    }
 
-    public String getWebUrl() { return webUrl; }
+    public String getWeb_url() {
+        return web_url;
+    }
 
-    public void setWebUrl(String webUrl) { this.webUrl = webUrl; }
+    public void setWeb_url(String web_url) {
+        this.web_url = web_url;
+    }
 
     public List<Comment> getAuthoredComments() { return authoredComments; }
 
@@ -94,13 +102,13 @@ public class User {
         sb.append('=');
         sb.append(((this.name == null) ? "<null>" : this.name));
         sb.append(',');
-        sb.append("avatarUrl");
+        sb.append("avatar_url");
         sb.append('=');
-        sb.append(((this.avatarUrl == null) ? "<null>" : this.avatarUrl));
+        sb.append(((this.avatar_url == null) ? "<null>" : this.avatar_url));
         sb.append(',');
-        sb.append("webUrl");
+        sb.append("web_url");
         sb.append('=');
-        sb.append(((this.webUrl == null) ? "<null>" : this.webUrl));
+        sb.append(((this.web_url == null) ? "<null>" : this.web_url));
         sb.append(',');
         if (sb.charAt((sb.length() - 1)) == ',') {
             sb.setCharAt((sb.length() - 1), ']');
