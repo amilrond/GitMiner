@@ -32,15 +32,15 @@ public class ProjectController {
         return project.get();
     }
 
-//    //POST http://localhost:8080/api/projects
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @PostMapping
-//    public Project create(@Valid @RequestBody Project project) {
-//        Project _project = new Project(project.getId(), project.getName(), project.getWebUrl());
-//        _project.setCommits(project.getCommits());
-//        _project.setIssues(project.getIssues());
-//        return repository.save(_project);
-//    }
+    //POST http://localhost:8080/api/projects
+   @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public Project create(@Valid @RequestBody Project project) {
+        Project _project = new Project(project.getId(), project.getName(), project.getWebUrl());
+        _project.setCommits(project.getCommits());
+        _project.setIssues(project.getIssues());
+        return repository.save(_project);
+    }
 
 
     //PUT http://localhost:8080/api/projects/{id}
