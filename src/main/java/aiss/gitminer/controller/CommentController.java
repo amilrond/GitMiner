@@ -3,8 +3,11 @@ package aiss.gitminer.controller;
 
 import aiss.gitminer.model.Comment;
 import aiss.gitminer.exception.CommentNotFoundException;
+import aiss.gitminer.model.Project;
 import aiss.gitminer.repository.CommentRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +34,13 @@ public class CommentController {
             throw new CommentNotFoundException();
         }
         return comment;
+    }
+
+    //POST http://localhost:8080/api/comments
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public Comment createComment(@Valid @RequestBody Comment comment) {
+        return repository.save(comment);
     }
 
 }

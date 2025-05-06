@@ -18,6 +18,7 @@ public class ProjectController {
     @Autowired
     ProjectRepository repository;
 
+
     //GET http://localhost:8080/api/projects
     @GetMapping
     public List<Project> findAll() { return repository.findAll(); }
