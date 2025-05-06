@@ -25,7 +25,7 @@ public class CommentController {
 
     //GET http://localhost:8080/api/comments/{id}
     @GetMapping("/{id}")
-    public Optional<Comment> findOne(@PathVariable long id) throws CommentNotFoundException {
+    public Optional<Comment> findOne(@PathVariable String id) throws CommentNotFoundException {
         Optional<Comment> comment = repository.findById(id);
         if (!comment.isPresent()) {
             throw new CommentNotFoundException();

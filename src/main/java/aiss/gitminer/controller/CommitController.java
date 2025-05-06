@@ -25,7 +25,7 @@ public class CommitController {
 
     //GET http://localhost:8080/api/commits/{id}
     @GetMapping("/{id}")
-    public Commit findOne(@PathVariable long id) throws CommitNotFoundException {
+    public Commit findOne(@PathVariable String id) throws CommitNotFoundException {
         Optional<Commit> commit = repository.findById(id);
         if (!commit.isPresent()) {
             throw new CommitNotFoundException();

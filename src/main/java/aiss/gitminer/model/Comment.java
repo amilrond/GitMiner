@@ -9,23 +9,22 @@ import jakarta.validation.constraints.NotEmpty;
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     @Column(name = "body", columnDefinition = "TEXT")
     @NotEmpty(message = "The message cannot be empty.")
     private String body;
 
-    @Column(name = "created_at")
-    @NotEmpty(message = "The field created_at cannot be empty.")
-    private String createdAt;
-
-    @Column(name = "updated_at")
-    private String updatedAt;
-
     @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
+
+    @Column(name = "created_at")
+    @NotEmpty(message = "The field created_at cannot be empty.")
+    private String created_at;
+
+    @Column(name = "updated_at")
+    private String updated_at;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "issue_id")
@@ -35,30 +34,30 @@ public class Comment {
 
     }
 
-    public Comment(long id, String body, String createdAt, String updatedAt, User author, Issue issue) {
+    public Comment(String id, String body, User author, String created_at, String updated_at) {
         this.id = id;
         this.body = body;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.author = author;
-        this.issue = issue;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+
     }
 
-    public long getId() { return id; }
+    public String getId() { return id; }
 
-    public void setId(long id) { this.id = id; }
+    public void setId(String id) { this.id = id; }
 
     public String getBody() { return body; }
 
     public void setBody(String body) { this.body = body; }
 
-    public String getCreatedAt() { return createdAt; }
+    public String getCreatedAt() { return created_at; }
 
-    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
+    public void setCreatedAt(String createdAt) { this.created_at = createdAt; }
 
-    public String getUpdatedAt() { return updatedAt; }
+    public String getUpdatedAt() { return updated_at; }
 
-    public void setUpdatedAt(String updatedAt) { this.updatedAt = updatedAt; }
+    public void setUpdatedAt(String updatedAt) { this.updated_at = updatedAt; }
 
     public User getAuthor() { return author; }
 
@@ -86,11 +85,11 @@ public class Comment {
         sb.append(',');
         sb.append("createdAt");
         sb.append('=');
-        sb.append(((this.createdAt == null) ? "<null>" : this.createdAt));
+        sb.append(((this.created_at == null) ? "<null>" : this.created_at));
         sb.append(',');
         sb.append("updatedAt");
         sb.append('=');
-        sb.append(((this.updatedAt == null) ? "<null>" : this.updatedAt));
+        sb.append(((this.updated_at == null) ? "<null>" : this.updated_at));
         sb.append(',');
         sb.append("comments");
         sb.append('=');

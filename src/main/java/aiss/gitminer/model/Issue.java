@@ -11,8 +11,7 @@ import java.util.List;
 public class Issue {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     @Column(name = "title")
     @NotEmpty(message = "Title cannot be empty")
@@ -25,123 +24,91 @@ public class Issue {
     private String state;
 
     @Column(name = "created_at")
-    private String createdAt;
+    private String created_at;
 
     @Column(name = "updated_at")
-    private String updatedAt;
+    private String updated_at;
 
     @Column(name = "closed_at")
-    private String closedAt;
+    private String closed_at;
 
     @ElementCollection
     @CollectionTable(name = "issue_labels", joinColumns = @JoinColumn(name = "issue_id"))
     @Column(name = "label")
     private List<String> labels;
 
-    @Column(name = "votes")
-    private Integer votes;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private User author;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
-    private Project project;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assignee_id")
     private User assignee;
 
+    @Column(name = "votes")
+    private Integer votes;
+
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     public Issue() {
 
     }
 
-    public Issue(String title, String description, String state, String createdAt, String updatedAt, String closedAt, List<String> labels, Integer votes) {
-        this.title = title;
-        this.description = description;
-        this.state = state;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.closedAt = closedAt;
-        this.labels = labels;
-        this.votes = votes;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
+    public Issue(String id, String title, String description, String state, String created_at, String updated_at, String closed_at, List<String> labels, User author, User assignee, Integer votes, List<Comment> comments) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
         this.state = state;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public String getClosedAt() {
-        return closedAt;
-    }
-
-    public void setClosedAt(String closedAt) {
-        this.closedAt = closedAt;
-    }
-
-    public List<String> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(List<String> labels) {
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.closed_at = closed_at;
         this.labels = labels;
+        this.author = author;
+        this.assignee = assignee;
+        this.votes = votes;
+        this.comments = comments;
     }
+
+    public String getId() { return id; }
+
+    public void setId(String id) { this.id = id; }
+
+    public String getTitle() { return title; }
+
+    public void setTitle(String title) { this.title = title; }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
+
+    public String getState() { return state; }
+
+    public void setState(String state) { this.state = state; }
+
+    public String getCreated_at() { return created_at; }
+
+    public void setCreated_at(String created_at) { this.created_at = created_at; }
+
+    public String getUpdated_at() { return updated_at; }
+
+    public void setUpdated_at(String updated_at) { this.updated_at = updated_at; }
+
+    public String getClosed_at() { return closed_at; }
+
+    public void setClosed_at(String closed_at) { this.closed_at = closed_at; }
+
+    public List<String> getLabels() { return labels; }
+
+    public void setLabels(List<String> labels) { this.labels = labels; }
 
     public Integer getVotes() { return votes; }
 
     public void setVotes(Integer votes) { this.votes = votes; }
-
-    public Project getProject() { return project; }
-
-    public void setProject(Project project) { this.project = project; }
 
     public User getAuthor() { return author; }
 
@@ -150,6 +117,10 @@ public class Issue {
     public User getAssignee() { return assignee; }
 
     public void setAssignee(User assignee) { this.assignee = assignee; }
+
+    public Project getProject() { return project; }
+
+    public void setProject(Project project) { this.project = project; }
 
     public List<Comment> getComments() { return comments; }
 
@@ -177,15 +148,15 @@ public class Issue {
         sb.append(',');
         sb.append("createdAt");
         sb.append('=');
-        sb.append(((this.createdAt == null) ? "<null>" : this.createdAt));
+        sb.append(((this.created_at == null) ? "<null>" : this.created_at));
         sb.append(',');
         sb.append("updatedAt");
         sb.append('=');
-        sb.append(((this.updatedAt == null) ? "<null>" : this.updatedAt));
+        sb.append(((this.updated_at == null) ? "<null>" : this.updated_at));
         sb.append(',');
         sb.append("closedAt");
         sb.append('=');
-        sb.append(((this.closedAt == null) ? "<null>" : this.closedAt));
+        sb.append(((this.closed_at == null) ? "<null>" : this.closed_at));
         sb.append(',');
         sb.append("labels");
         sb.append('=');

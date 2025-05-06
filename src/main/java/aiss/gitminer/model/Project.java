@@ -11,8 +11,7 @@ import java.util.List;
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     @Column(name="name")
     @NotEmpty(message = "The name of the project cannot be empty")
@@ -20,7 +19,7 @@ public class Project {
 
     @Column(name="web_url")
     @NotEmpty(message = "The URL of the project cannot be empty")
-    public String webUrl;
+    public String web_url;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Commit> commits;
@@ -32,18 +31,19 @@ public class Project {
 
     }
 
-    public Project(String name, String web_url) {
+    public Project(String id, String name, String web_url) {
+        this.id = id;
         this.name = name;
-        this.webUrl = web_url;
-        this.issues = new ArrayList<>();
+        this.web_url = web_url;
         this.commits = new ArrayList<>();
+        this.issues = new ArrayList<>();
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -56,11 +56,11 @@ public class Project {
     }
 
     public String getWebUrl() {
-        return webUrl;
+        return web_url;
     }
 
     public void setWebUrl(String webUrl) {
-        this.webUrl = webUrl;
+        this.web_url = webUrl;
     }
 
     public List<Commit> getCommits() {

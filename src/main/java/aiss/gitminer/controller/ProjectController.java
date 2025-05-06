@@ -1,8 +1,8 @@
 package aiss.gitminer.controller;
 
 import aiss.gitminer.exception.ProjectNotFoundException;
-import aiss.gitminer.model.Project;
-import aiss.gitminer.repository.ProjectRepository;
+import aiss.gitminer.model.*;
+import aiss.gitminer.repository.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class ProjectController {
 
     //GET http://localhost:8080/api/projects/{id}
     @GetMapping("/{id}")
-    public Project findOne(@PathVariable long id) throws ProjectNotFoundException {
+    public Project findOne(@PathVariable String id) throws ProjectNotFoundException {
         Optional<Project> project = repository.findById(id);
         if (!project.isPresent()) {
             throw new ProjectNotFoundException();
@@ -32,19 +32,20 @@ public class ProjectController {
         return project.get();
     }
 
-    //POST http://localhost:8080/api/projects
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public Project create(@Valid @RequestBody Project project) {
-        Project _project = new Project(project.getName(), project.getWebUrl());
-        _project.setCommits(project.getCommits());
-        _project.setIssues(project.getIssues());
-        return repository.save(_project);
-    }
+//    //POST http://localhost:8080/api/projects
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @PostMapping
+//    public Project create(@Valid @RequestBody Project project) {
+//        Project _project = new Project(project.getId(), project.getName(), project.getWebUrl());
+//        _project.setCommits(project.getCommits());
+//        _project.setIssues(project.getIssues());
+//        return repository.save(_project);
+//    }
+
 
     //PUT http://localhost:8080/api/projects/{id}
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody Project updatedProject, @PathVariable long id) throws ProjectNotFoundException {
+    public void update(@Valid @RequestBody Project updatedProject, @PathVariable String id) throws ProjectNotFoundException {
         Optional<Project> projectData = repository.findById(id);
         if (!projectData.isPresent()) {
             throw new ProjectNotFoundException();
@@ -62,7 +63,7 @@ public class ProjectController {
     //DELETE http://localhost:8080/api/projects/{id}
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) throws ProjectNotFoundException {
+    public void delete(@PathVariable String id) throws ProjectNotFoundException {
         if (!repository.existsById(id)) {
             throw new ProjectNotFoundException();
         }

@@ -28,7 +28,7 @@ public class IssueController {
 
     // GET http://localhost:8080/api/issues/{id}
     @GetMapping("/{id}")
-    public Issue findOne(@PathVariable long id) throws IssueNotFoundException {
+    public Issue findOne(@PathVariable String id) throws IssueNotFoundException {
         Optional<Issue> issue = repository.findById(id);
         if (!issue.isPresent()) {
             throw new IssueNotFoundException();
