@@ -19,6 +19,7 @@ public class Comment {
     @JoinColumn(name = "author_id")
     private User author;
 
+
     @Column(name = "created_at")
     @NotEmpty(message = "The field created_at cannot be empty.")
     private String created_at;
@@ -51,12 +52,16 @@ public class Comment {
 
     public void setBody(String body) { this.body = body; }
 
+    @JsonProperty("created_at")
     public String getCreatedAt() { return created_at; }
 
+    @JsonProperty("created_at")
     public void setCreatedAt(String createdAt) { this.created_at = createdAt; }
 
+    @JsonProperty("updated_at")
     public String getUpdatedAt() { return updated_at; }
 
+    @JsonProperty("updated_at")
     public void setUpdatedAt(String updatedAt) { this.updated_at = updatedAt; }
 
     public User getAuthor() { return author; }

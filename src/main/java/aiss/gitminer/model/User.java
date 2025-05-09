@@ -1,5 +1,6 @@
 package aiss.gitminer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -27,12 +28,6 @@ public class User {
 
     @OneToMany(mappedBy = "author")
     private List<Comment> authoredComments;
-
-    @OneToMany(mappedBy = "author")
-    private List<Issue> authoredIssues;
-
-    @OneToMany(mappedBy = "assignee")
-    private List<Issue> assignedIssues;
 
     public User() {
     }
@@ -72,18 +67,6 @@ public class User {
     public void setWeb_url(String web_url) {
         this.web_url = web_url;
     }
-
-    public List<Comment> getAuthoredComments() { return authoredComments; }
-
-    public void setAuthoredComments(List<Comment> authoredComments) { this.authoredComments = authoredComments; }
-
-    public List<Issue> getAuthoredIssues() { return authoredIssues; }
-
-    public void setAuthoredIssues(List<Issue> authoredIssues) { this.authoredIssues = authoredIssues; }
-
-    public List<Issue> getAssignedIssues() { return assignedIssues; }
-
-    public void setAssignedIssues(List<Issue> assignedIssues) { this.assignedIssues = assignedIssues; }
 
     @Override
     public String toString() {
