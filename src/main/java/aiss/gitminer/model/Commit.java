@@ -13,7 +13,6 @@ public class Commit {
     private String id;
 
     @Column(name="title")
-    @NotEmpty(message = "The name of the commit cannot be empty")
     private String title;
 
     @Column(name = "message", columnDefinition = "TEXT")

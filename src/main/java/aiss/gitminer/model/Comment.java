@@ -1,5 +1,6 @@
 package aiss.gitminer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -15,7 +16,7 @@ public class Comment {
     @NotEmpty(message = "The message cannot be empty.")
     private String body;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private User author;
 
@@ -27,6 +28,7 @@ public class Comment {
     @Column(name = "updated_at")
     private String updated_at;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "issue_id")
     private Issue issue;
