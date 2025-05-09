@@ -1,5 +1,6 @@
 package aiss.gitminer.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -51,66 +52,82 @@ public class Commit {
         this.web_url = webUrl;
     }
 
+    @JsonProperty("id")
     public String getId() {
         return id;
     }
 
+    @JsonProperty("id")
     public void setId(String id) {
         this.id = id;
     }
 
+    @JsonProperty("title")
     public String getTitle() {
         return title;
     }
 
+    @JsonProperty("title")
     public void setTitle(String title) {
         this.title = title;
     }
 
+    @JsonProperty("message")
     public String getMessage() {
         return message;
     }
 
+    @JsonProperty("message")
     public void setMessage(String message) {
         this.message = message;
     }
 
+    @JsonProperty("author_name")
     public String getAuthorName() {
         return author_name;
     }
 
+    @JsonProperty("author_name")
     public void setAuthorName(String authorName) {
         this.author_name = authorName;
     }
 
+    @JsonProperty("author_email")
     public String getAuthorEmail() {
         return author_email;
     }
 
+    @JsonProperty("author_email")
     public void setAuthorEmail(String authorEmail) {
         this.author_email = authorEmail;
     }
 
+    @JsonProperty("authored_date")
     public String getAuthoredDate() {
         return authored_date;
     }
 
+    @JsonProperty("authored_date")
     public void setAuthoredDate(String authoredDate) {
         this.authored_date = authoredDate;
     }
 
+    @JsonProperty("web_url")
     public String getWebUrl() {
         return web_url;
     }
 
+    @JsonProperty("web_url")
     public void setWebUrl(String webUrl) {
         this.web_url = webUrl;
     }
 
+    @JsonProperty("project")
     public Project getProject() {
         return project;
     }
 
+    @JsonProperty("project")
     public void setProject(Project project) {
         this.project = project;
     }

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/projects")
+@RequestMapping("/gitminer/projects")
 public class ProjectController {
 
     @Autowired
@@ -37,10 +37,7 @@ public class ProjectController {
    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Project create(@Valid @RequestBody Project project) {
-        Project _project = new Project(project.getId(), project.getName(), project.getWebUrl());
-        _project.setCommits(project.getCommits());
-        _project.setIssues(project.getIssues());
-        return repository.save(_project);
+       return repository.save(project);
     }
 
 
