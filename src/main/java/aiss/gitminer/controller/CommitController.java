@@ -2,7 +2,6 @@ package aiss.gitminer.controller;
 
 import aiss.gitminer.exception.CommitNotFoundException;
 import aiss.gitminer.model.Commit;
-import aiss.gitminer.model.Project;
 import aiss.gitminer.repository.CommitRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +12,17 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/commits")
+@RequestMapping("/gitminer/commits")
 public class CommitController {
 
     @Autowired
     CommitRepository repository;
 
-    //GET http://localhost:8080/api/commits
+    //GET http://localhost:8080/gitminer/commits
     @GetMapping
     public List<Commit> findAll() { return repository.findAll(); }
 
-    //GET http://localhost:8080/api/commits/{id}
+    //GET http://localhost:8080/gitminer/commits/{id}
     @GetMapping("/{id}")
     public Commit findOne(@PathVariable String id) throws CommitNotFoundException {
         Optional<Commit> commit = repository.findById(id);
@@ -33,7 +32,7 @@ public class CommitController {
         return commit.get();
     }
 
-    //POST http://localhost:8080/api/commits
+    //POST http://localhost:8080/gitminer/commits
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Commit update(@Valid @RequestBody Commit commit) {

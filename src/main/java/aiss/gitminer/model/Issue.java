@@ -38,7 +38,7 @@ public class Issue {
     @Column(name = "label")
     private List<String> labels;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private User author;
 

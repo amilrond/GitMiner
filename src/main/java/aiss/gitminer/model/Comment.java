@@ -16,7 +16,7 @@ public class Comment {
     @NotEmpty(message = "The message cannot be empty.")
     private String body;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private User author;
 

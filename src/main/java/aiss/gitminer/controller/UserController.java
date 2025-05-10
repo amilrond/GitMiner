@@ -12,20 +12,20 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/gitminer/users")
 public class UserController {
 
     @Autowired
     UserRepository repository;
 
-    //GET http://localhost:8080/api/users
+    //GET http://localhost:8080/gitminer/users
     @GetMapping
     public List<User> findAll() {
         return repository.findAll();
     }
 
 
-    //GET http://localhost:8080/api/users/{id}
+    //GET http://localhost:8080/gitminer/users/{id}
     @GetMapping("/{id}")
     public  User findOne(@PathVariable String id) throws UserNotFoundException {
         Optional<User> user = repository.findById(id);
@@ -35,7 +35,7 @@ public class UserController {
         return user.get();
     }
 
-    // POST http://localhost:8080/api/users
+    // POST http://localhost:8080/gitminer/users
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@RequestBody User user) {
