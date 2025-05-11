@@ -26,16 +26,35 @@ public class IssueController {
     UserRepository userRepository;
 
     // GET http://localhost:8080/gitminer/issues
-    @GetMapping
-    public List<Issue> findAll() { return repository.findAll(); }
-
     // GET http://localhost:8080/gitminer/issues?state=open
-    @GetMapping("/state")
-    public List<Issue> findByState(@RequestParam(required = false) String state) {
-        if (state != null) {
-            return repository.findByState(state);
+    // GET http://localhost:8080/gitminer/issues?authorId=5122337
+    // GET http://localhost:8080/gitminer/issues?state=open&authorId=5122337
+    @GetMapping
+    public List<Issue> findAll(
+            @RequestParam(required = false) String state,
+            @RequestParam(required = false) String authorId) throws IssueNotFoundException, UserNotFoundException {
+
+        List<Issue> issues;
+
+        if (state != null && authorId != null) {
+            if (!userRepository.existsById(authorId)) {
+                throw new UserNotFoundException();
+            }
+            issues = repository.findByStateAndAuthor_Id(state, authorId);
+        } else if (state != null) {
+            issues = repository.findByState(state);
+        } else if (authorId != null) {
+            if (!userRepository.existsById(authorId)) {
+                throw new UserNotFoundException();
+            }
+            issues = repository.findByAuthor_Id(authorId);
+        } else {
+            issues = repository.findAll();
         }
-        return repository.findAll();
+        if (issues.isEmpty()) {
+            throw new IssueNotFoundException();
+        }
+        return issues;
     }
 
     // GET http://localhost:8080/gitminer/issues/{id}
@@ -63,15 +82,6 @@ public class IssueController {
             throw new IssueNotFoundException();
         }
         return issue.get().getComments();
-    }
-
-    // GET http://localhost:8080/gitminer/issues?authorId=5122337
-    @GetMapping("/author")
-    public List<Issue> findByAuthorId(@RequestParam String authorId) throws UserNotFoundException {
-        if (!userRepository.existsById(authorId)) {
-            throw new UserNotFoundException();
-        }
-        return repository.findByAuthor_Id(authorId);
     }
 }
 
